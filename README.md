@@ -1,9 +1,21 @@
 # 🛟 CodeXRays 1.0.1
 
-<img width="1046" height="638" alt="image" src="https://github.com/user-attachments/assets/4ce3cea3-7638-408b-9433-d6714d30ddd4" />
+<p><img width="1046" height="638" alt="image" src="https://github.com/user-attachments/assets/4ce3cea3-7638-408b-9433-d6714d30ddd4" /></p>
 
-Meet CodeXRays — a friendly, fast TUI that shines a light on what your AI sessions are doing. It tails your live logs from OpenAI's [Codex](http://github.com/openai/codex), understands the streaming events, and presents them as a clean, colorful timeline with smart previews and a beautiful JSON detail view.
 
+**🛟 CodeXRays** — a friendly, fast TUI that shines a light on what [Codex](http://github.com/openai/codex) sessions are doing. It tails your live logs from OpenAI's [Codex](http://github.com/openai/codex), understands the streaming events, and presents them as a clean, colorful timeline with smart previews and a beautiful JSON detail view.
+
+## 🚀 Quick Start 
+
+```bash
+# Install once
+$ pipx install git+https://github.com/gastonmorixe/codex-xrays
+
+# Recommended run (best experience):
+# 🧠 Pretty list previews + 🎨 JSON detail view (full screen)
+# tails ~/.codex/log/codex-tui.log by default
+$ codex-xrays --pretty-preview --pretty-mode hybrid --json-pretty
+```
 
 ```bash
 # Add the following RUST_LOG env var so codex 
@@ -35,7 +47,7 @@ Working in real time
 - Memory‑safe rolling buffers and high‑frequency rendering loop tuned for fast streams.
 
 
-## 🚀 Quick Start (Best Experience)
+## 🚀 Getting Started
 
 - Requirements: Python 3.8+.
   - macOS/Linux: comes with `curses`.
