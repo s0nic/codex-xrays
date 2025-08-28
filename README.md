@@ -1,9 +1,8 @@
 # 🛟 CodeXRays 1.0.1
 
-
 <img width="1046" height="638" alt="image" src="https://github.com/user-attachments/assets/4ce3cea3-7638-408b-9433-d6714d30ddd4" />
 
-A fast, colorful, terminal UI that visualizes streaming Codex logs in real time. It tails `codex-tui.log`, parses SSE events, aggregates fast deltas by `item_id`, and renders a live dashboard with multiline entries, selection, pinning, filters, and a full‑screen detail view.
+Meet CodeXRays — a friendly, fast TUI that shines a light on what your AI sessions are doing. It tails your live logs from OpenAI's [Codex](http://github.com/openai/codex), understands the streaming events, and presents them as a clean, colorful timeline with smart previews and a beautiful JSON detail view.
 
 
 ```bash
@@ -29,7 +28,7 @@ $ RUST_LOG=codex_core=trace,codex_exec=debug,codex_mcp_client=debug \
 - Memory‑safe rolling buffers and high‑frequency rendering loop tuned for fast streams.
 
 
-## Quick Start
+## 🚀 Quick Start (Best Experience)
 
 - Requirements: Python 3.8+.
   - macOS/Linux: comes with `curses`.
@@ -42,7 +41,7 @@ $ RUST_LOG=codex_core=trace,codex_exec=debug,codex_mcp_client=debug \
 pipx install git+https://github.com/gastonmorixe/codex-xrays
 
 # Recommended run (best experience):
-# 🧠 Pretty list previews + 🎨 JSON pretty view in full screen
+# 🧠 Pretty list previews + 🎨 JSON detail view (full screen)
 # tails ~/.codex/log/codex-tui.log by default
 codex-xrays --pretty-preview --pretty-mode hybrid --json-pretty
 ```
@@ -60,25 +59,19 @@ XRAYS_PRETTY=1 XRAYS_PRETTY_MODE=hybrid python3 codexrays.py --json-pretty
 ```
 
 
-## Keybindings
+## ⌨️ Keybindings (at a glance)
 
-- q: quit
-- ↑/↓ or j/k: move selection
-- Enter: open full‑screen detail view of the selected entry
-- x: pin/unpin selected entry (pinned items stay on top)
-- f: cycle filter (all → args.delta → output.delta → error → all)
-- e: export selected entry content to a `codexrays_export_*.txt` file
-- b: cycle pretty mode (off → summary → hybrid)
-- m: toggle more lines for selected item (uses `--lines-expanded`)
-- T: jump to newest and resume follow (shows banner when paused)
-- When paused and new items arrive, a top banner shows “(X) newer logs — press T to follow”.
-- p: pause/resume tailing
-- s: toggle "from start" mode and reopen the file
-- Space: manual refresh
-- In full‑screen JSON view (`--json-pretty`): `w` toggles word‑wrap (🟢 on by default).
+- q: quit • ↑/↓ or j/k: move • Enter: full‑screen detail
+- x: pin/unpin • f: filter (all → args.delta → output.delta → error → all)
+- e: export selection → `codexrays_export_*.txt`
+- b: pretty preview mode (off → summary → hybrid)
+- m: more lines for selected item (`--lines-expanded`)
+- T: jump to newest and resume follow (banner shows “(X) newer logs — press T to follow”)
+- p: pause • s: toggle “from start” • Space: refresh
+- Full‑screen JSON (`--json-pretty`): w toggles word‑wrap (🟢 on by default)
 
 
-## Command‑line Options
+## ⚙️ Command‑line Options
 
 - `-f, --file <path>`: Path to the log file. Default: `~/.codex/log/codex-tui.log`.
 - `--from-start`: Read from the start of the file (otherwise tail from end).
@@ -91,19 +84,19 @@ XRAYS_PRETTY=1 XRAYS_PRETTY_MODE=hybrid python3 codexrays.py --json-pretty
 - `--json-pretty`: In full‑screen detail view, pretty‑print JSON and color keys/values.
 
 
-## What the UI Shows
+## 🖼️ What the UI Shows
 
 - Header: app name + `[FOLLOWING]` badge when active, plus counters (🧮 events/deltas, ⚡ EPS), total items, active filter, and `pretty:off|summary|hybrid`.
 - Main list: most recently updated entries first. Each entry shows `short_item_id#output_index:` plus up to `N` wrapped lines of the latest content. Colors map to event types.
 - Recent logs: compact tail of non‑delta events. With pretty mode, SSE/FunctionCall lines are summarized (🧰 tools, 🔎 queries, 🔗 hosts, 📄 files, 🛠️ commands, 💬 text).
 
-## Configuration
+## 🛠️ Configuration
 - `XRAYS_PRETTY=1`: Start with pretty previews enabled (same as `--pretty-preview`).
 - `XRAYS_PRETTY_MODE=summary|hybrid`: Choose preview style when enabled.
 - `XRAYS_KEEP_ANSI=1`: Keep ANSI color codes in recent logs (by default they are stripped).
 
 
-## Parsing Logic
+## 🔎 Parsing Logic
 
 - Lines matching `... SSE event: {json}` are parsed as JSON.
 - If `type` ends with `.delta` and has `item_id`, the `delta` string is appended to that stream, keyed by `(item_id, output_index)`.
@@ -116,7 +109,7 @@ XRAYS_PRETTY=1 XRAYS_PRETTY_MODE=hybrid python3 codexrays.py --json-pretty
   - Others: default
 
 
-## Multiline Rendering
+## 🧵 Multiline Rendering
 
 - Each entry renders up to `--lines-per-item` wrapped lines.
 - In normal mode, shows the most recent lines; in pretty mode, shows the summary first (and, in `hybrid`, a raw excerpt beneath).
