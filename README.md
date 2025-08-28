@@ -1,6 +1,6 @@
 # 🛟 CodeXRays 1.0.1
 
-<p><img width="1046" height="638" alt="image" src="https://github.com/user-attachments/assets/4ce3cea3-7638-408b-9433-d6714d30ddd4" /></p>
+<p><a href="https://www.youtube.com/watch?v=SEFqOdGIFE4" target="_blank" title="Youtube - CodeXRay - OpenAI Codex CLI real-time interactive logs visualizer"><img width="1046" height="638" alt="image" src="https://github.com/user-attachments/assets/4ce3cea3-7638-408b-9433-d6714d30ddd4" /></a></p>
 
 
 **🛟 CodeXRays** — a friendly, fast TUI that shines a light on what [Codex](http://github.com/openai/codex) sessions are doing. It tails your live logs from OpenAI's [Codex](http://github.com/openai/codex), understands the streaming events, and presents them as a clean, colorful timeline with smart previews and a beautiful JSON detail view.
