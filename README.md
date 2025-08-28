@@ -13,9 +13,16 @@ $ RUST_LOG=codex_core=trace,codex_exec=debug,codex_mcp_client=debug \
    codex -m gpt-5 
 ```
 
-> Built to handle very rapid, tiny delta events and show them as coherent streams like:
->
-> `fc_68af97f4d…#1: that require` → continuously appends as deltas arrive.
+
+## Examples 
+
+Plan tool vs raw plan log
+
+<img width="1138" height="696" alt="Plan tool vs raw plan log" src="https://github.com/user-attachments/assets/80ea4aee-f0cd-433f-8abc-6fff453ae46b" />
+
+Working in real time
+
+<img width="1545" height="940" alt="Screenshot 2025-08-28 at 00 41 34" src="https://github.com/user-attachments/assets/dcb1a029-b6bf-4033-85da-dd52abbdf1b0" />
 
 
 ## Highlights
