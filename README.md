@@ -2,31 +2,26 @@
 
 <p><a href="https://www.youtube.com/watch?v=SEFqOdGIFE4" target="_blank" title="Youtube - CodeXRay - OpenAI Codex CLI real-time interactive logs visualizer"><img width="1046" height="638" alt="image" src="https://github.com/user-attachments/assets/4ce3cea3-7638-408b-9433-d6714d30ddd4" /></a></p>
 
-
 **🛟 CodeXRays** — a friendly, fast TUI that shines a light on what [Codex](http://github.com/openai/codex) sessions are doing. It tails your live logs from OpenAI's [Codex](http://github.com/openai/codex), understands the streaming events, and presents them as a clean, colorful timeline with smart previews and a beautiful JSON detail view.
 
-## 🚀 Quick Start 
+## 🚀 Quick Start
 
 ```bash
-# Install once
-$ pipx install git+https://github.com/gastonmorixe/codex-xrays
-
-# Recommended run (best experience):
 # 🧠 Pretty list previews + 🎨 JSON detail view (full screen)
 # tails ~/.codex/log/codex-tui.log by default
-$ codex-xrays --pretty-preview --pretty-mode hybrid --json-pretty
+$ pipx run --spec git+https://github.com/gastonmorixe/codex-xrays \
+    codex-xrays --pretty-preview --pretty-mode hybrid --json-pretty
 ```
 
 ```bash
-# Add the following RUST_LOG env var so codex 
-# saves detailed log ~/.codex/log/codex-tui.log 
+# Add the following RUST_LOG env var so codex
+# saves detailed log ~/.codex/log/codex-tui.log
 
 $ RUST_LOG=codex_core=trace,codex_exec=debug,codex_mcp_client=debug \
-   codex -m gpt-5 
+   codex -m gpt-5
 ```
 
-
-## Examples 
+## Examples
 
 Plan tool vs raw plan log
 
@@ -36,7 +31,6 @@ Working in real time
 
 <img width="1545" height="940" alt="Screenshot 2025-08-28 at 00 41 34" src="https://github.com/user-attachments/assets/dcb1a029-b6bf-4033-85da-dd52abbdf1b0" />
 
-
 ## Highlights
 
 - Real‑time tailing of `codex-tui.log` with log‑rotation detection.
@@ -45,7 +39,6 @@ Working in real time
 - Pin items to the top, filter by event type, and export selected content to a file.
 - Shows recent non‑SSE lines for additional context (INFO/WARN/ERROR badges).
 - Memory‑safe rolling buffers and high‑frequency rendering loop tuned for fast streams.
-
 
 ## 🚀 Getting Started
 
@@ -77,7 +70,6 @@ python3 codexrays.py -f ./codex-tui.log -L 8 --max-items 300
 XRAYS_PRETTY=1 XRAYS_PRETTY_MODE=hybrid python3 codexrays.py --json-pretty
 ```
 
-
 ## ⌨️ Keybindings (at a glance)
 
 - q: quit • ↑/↓ or j/k: move • Enter: full‑screen detail
@@ -88,7 +80,6 @@ XRAYS_PRETTY=1 XRAYS_PRETTY_MODE=hybrid python3 codexrays.py --json-pretty
 - T: jump to newest and resume follow (banner shows “(X) newer logs — press T to follow”)
 - p: pause • s: toggle “from start” • Space: refresh
 - Full‑screen JSON (`--json-pretty`): w toggles word‑wrap (🟢 on by default)
-
 
 ## ⚙️ Command‑line Options
 
@@ -102,7 +93,6 @@ XRAYS_PRETTY=1 XRAYS_PRETTY_MODE=hybrid python3 codexrays.py --json-pretty
 - `--keep-ansi`: Do not strip ANSI color codes from recent logs (default strips them).
 - `--json-pretty`: In full‑screen detail view, pretty‑print JSON and color keys/values.
 
-
 ## 🖼️ What the UI Shows
 
 - Header: app name + `[FOLLOWING]` badge when active, plus counters (🧮 events/deltas, ⚡ EPS), total items, active filter, and `pretty:off|summary|hybrid`.
@@ -110,10 +100,10 @@ XRAYS_PRETTY=1 XRAYS_PRETTY_MODE=hybrid python3 codexrays.py --json-pretty
 - Recent logs: compact tail of non‑delta events. With pretty mode, SSE/FunctionCall lines are summarized (🧰 tools, 🔎 queries, 🔗 hosts, 📄 files, 🛠️ commands, 💬 text).
 
 ## 🛠️ Configuration
+
 - `XRAYS_PRETTY=1`: Start with pretty previews enabled (same as `--pretty-preview`).
 - `XRAYS_PRETTY_MODE=summary|hybrid`: Choose preview style when enabled.
 - `XRAYS_KEEP_ANSI=1`: Keep ANSI color codes in recent logs (by default they are stripped).
-
 
 ## 🔎 Parsing Logic
 
@@ -127,7 +117,6 @@ XRAYS_PRETTY=1 XRAYS_PRETTY_MODE=hybrid python3 codexrays.py --json-pretty
   - Types containing `error`: red
   - Others: default
 
-
 ## 🧵 Multiline Rendering
 
 - Each entry renders up to `--lines-per-item` wrapped lines.
@@ -135,18 +124,15 @@ XRAYS_PRETTY=1 XRAYS_PRETTY_MODE=hybrid python3 codexrays.py --json-pretty
 - Wrapping is character‑based to ensure speed and deterministic layout.
 - The selection auto‑scrolls to remain visible as new events push items.
 
-
 ## Full‑screen Detail View
 
 - Press Enter on a selected entry to open a full‑screen viewer.
 - Scroll with ↑/↓/PgUp/PgDn/Home/End. Live updates continue while viewing.
 - Use `e` to export the full content; `x` to pin/unpin; `q` or ESC to return.
 
-
 ## Export
 
 - `e` writes the selected item’s content to `codexrays_export_<id>_<idx>_<timestamp>.txt` in the current directory.
-
 
 ## Performance Notes
 
@@ -154,10 +140,10 @@ XRAYS_PRETTY=1 XRAYS_PRETTY_MODE=hybrid python3 codexrays.py --json-pretty
 - Each stream keeps a rolling window (character budget) to bound memory.
 - The UI loop targets ~50 FPS; EPS is sampled every 0.5 seconds.
 
-
 ## Troubleshooting
 
 ## Preview Behavior
+
 - Pretty mode shows a one-line summary followed by live tail lines, so the newest text is always visible. Increase `-L` or press `m` to see more.
 - Recent logs strip ANSI color codes by default for readability; use `--keep-ansi` if your logs rely on terminal colors.
 - Full‑screen JSON (with `--json-pretty`) pretty‑prints objects/arrays with light colors; press `w` to wrap/unwrap long values.
@@ -166,7 +152,6 @@ XRAYS_PRETTY=1 XRAYS_PRETTY_MODE=hybrid python3 codexrays.py --json-pretty
 - Large files: prefer tail mode (default). Use `--from-start` only when needed.
 - Log path: pass `-f /path/to/codex-tui.log` if not running in the log folder.
 - Flicker: prefer a modern terminal and a reasonable window size; the app uses full‑screen redraws for speed.
-
 
 ## Currently Implemented
 
@@ -179,7 +164,6 @@ XRAYS_PRETTY=1 XRAYS_PRETTY_MODE=hybrid python3 codexrays.py --json-pretty
 - Export selected content
 - Recent non‑SSE logs panel with level badges
 - Stats header: events, deltas, EPS, items, filter
-
 
 ## Roadmap / Ideas
 
@@ -196,25 +180,28 @@ XRAYS_PRETTY=1 XRAYS_PRETTY_MODE=hybrid python3 codexrays.py --json-pretty
 - Web/remote view: optional headless server + web UI mirroring the TUI.
 
 ### UX & Interaction
+
 - Per‑item pretty toggle: expand only the selected item’s preview (`B`).
 - Detail view prettify: optional parsed rendering in the fullscreen view (`D`).
 - Multi‑file run: `--files a.log b.log` with per‑file badges and filters.
 
 ### Preview & Parsing
+
 - Tool taxonomy: map common tools to friendly names and surface relevant knobs (e.g., `top_k`, `temperature`).
 - Redaction: detect and mask secrets (API keys, Bearer tokens, high‑entropy strings) in previews.
 
 ### Performance & Robustness
+
 - Word‑boundary wrapping: `--wrap word` to reduce chopped words.
 - Smarter redraws: diff rows and use `noutrefresh()/doupdate()` to lower CPU.
 - Backpressure: reduce render rate at very high EPS or small terminals.
 
 ### Configuration & Packaging
+
 - Export names: switch to `xrays_export_*.txt` and ignore in VCS.
 - Defaults file: support `~/.xrays.toml` for persistent flags (pretty mode, lines per item).
 - No‑color mode: `--no-color` for dumb terminals and CI outputs.
 - Packaging: add `pyproject.toml` + entry point (`codex-xrays`) for `pipx` install.
-
 
 ## Contributing
 
@@ -222,11 +209,12 @@ XRAYS_PRETTY=1 XRAYS_PRETTY_MODE=hybrid python3 codexrays.py --json-pretty
 - Style: small, focused functions; prefer predictable redraw over cleverness.
 - Please test with a large/fast log stream before submitting.
 
-
 ## License
 
 Gaston Morixe - MIT License 2025
+
 ## Release
+
 - Update `CHANGELOG.md` with a new `## <version>` section.
 - Tag the version: `git tag -a 1.0.1 -m "CodeXRays 1.0.1" && git push origin 1.0.1`.
 - GitHub Actions publishes a release using the matching CHANGELOG section (falls back to commits if not found).
